@@ -8,28 +8,14 @@ import { CartContext } from "../context/CartContext";
 import { useState, useMemo, useContext } from "react";
 
 export default function ShopPage() {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, addToCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
 
   const { data, loading, error } = useFetch(
     "https://fakestoreapi.com/products",
   );
 
-  function addToCart(product) {
-    setCart((prev) => {
-      if (prev.find((productInCart) => productInCart.id === product.id)) {
-        return prev.map((item) => {
-          if (item.id === product.id) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-      } else {
-        return [...prev, { ...product, quantity: 1 }];
-      }
-    });
-  }
+  
 
   const filteredProducts = useMemo(() => {
     const products = adapt(data);

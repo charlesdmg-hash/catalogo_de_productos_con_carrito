@@ -48,10 +48,22 @@ export default function CartPage() {
     }
   };
 
+  const subtotals = cart.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price * currentValue.quantity;
+  }, 0);
+
+  const tax = 0.1;
+  const shipping = cart.length > 0 ? 5 : 0;
+  const total = subtotals + subtotals * tax + shipping;
+
   return (
     <>
       <h2>CartPage</h2>
       {show_items}
+      <p>Subtotal: {subtotals.toFixed(2)}</p>
+      <p>Tax: {tax * 100}%</p>
+      <p>Shipping: {shipping}$</p>
+      <p>Total: {total.toFixed(2)}$</p>
       {cart.length === 0 ? (
         <p> Your cart is Empty</p>
       ) : (
