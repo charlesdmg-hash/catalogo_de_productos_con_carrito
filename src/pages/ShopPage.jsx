@@ -2,7 +2,10 @@ import ProductList from "../components/ProductList/ProductList";
 import Header from "../components/Header/Header";
 import CartItem from "../components/CartItem/CartItem";
 import SearchBar from "../components/SearchBar/SearchBar";
+import adapt from "../utils/adaptar";
+
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function ShopPage() {
   const [cart, setCart] = useState([]);
@@ -10,31 +13,25 @@ export default function ShopPage() {
   const [selectedProductId, setSelectedProductId] = useState("");
   const [searchText, setSearchText] = useState("");
 
-  const test_product = [
-    {
-      id: 1,
-      name: "Laptop",
-      price: 250,
-      image:
-        "https://g2u-wp-prod.s3-ap-southeast-2.amazonaws.com/wp-content/uploads/2025/01/shutterstock_2328203513-900x666.jpg",
-    },
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    {
-      id: 2,
-      name: "Tablet",
-      price: 400,
-      image:
-        "https://g2u-wp-prod.s3-ap-southeast-2.amazonaws.com/wp-content/uploads/2025/01/shutterstock_2328203513-900x666.jpg",
-    },
+  useEffect(() => {
+    const cargar = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products");
 
-    {
-      id: 3,
-      name: "PS5",
-      price: 500,
-      image:
-        "https://g2u-wp-prod.s3-ap-southeast-2.amazonaws.com/wp-content/uploads/2025/01/shutterstock_2328203513-900x666.jpg",
-    },
-  ];
+        if (!res.ok) throw new Error("Error ocurred");
+        setProducts(adapt(await res.json()));
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    cargar();
+  }, []);
 
   function addToCart(product) {
     setCart((prev) => {
@@ -92,9 +89,12 @@ export default function ShopPage() {
     }
   };
 
-  const filteredProducts = test_product.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     return product.name.toLowerCase().includes(searchText.toLowerCase());
   });
+
+  if (loading) return <p>Cargando ...</p>;
+  if (error) return <p>{ error } </p>;
 
   return (
     <>
