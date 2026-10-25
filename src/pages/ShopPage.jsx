@@ -1,17 +1,14 @@
 import ProductList from "../components/ProductList/ProductList";
 import Header from "../components/Header/Header";
-import CartItem from "../components/CartItem/CartItem";
 import SearchBar from "../components/SearchBar/SearchBar";
 import adapt from "../utils/adaptar";
-import useLocalStorage from "../hooks/useLocalStorage";
 import useFetch from "../hooks/useFetch";
+import { CartContext } from "../context/CartContext";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 
 export default function ShopPage() {
-  const [cart, setCart] = useLocalStorage({ key: "cart", initialValue: [] });
-  const [quantityInput, setQuantityInput] = useState(1);
-  const [selectedProductId, setSelectedProductId] = useState("");
+  const { cart, setCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
 
   const { data, loading, error } = useFetch(
@@ -34,46 +31,6 @@ export default function ShopPage() {
     });
   }
 
-  function deleteFromCart(id) {
-    setCart((prev) => {
-      return prev.filter((product) => id !== product.id);
-    });
-  }
-
-  const show_items = cart.map((item) => {
-    return <CartItem key={item.id} item={item} onRemove={deleteFromCart} />;
-  });
-
-  const options = cart.map((option) => {
-    return (
-      <option key={option.id} value={option.id}>
-        {" "}
-        {option.name}{" "}
-      </option>
-    );
-  });
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    if (selectedProductId) {
-      const id = Number(selectedProductId);
-      const quantity = Number(quantityInput);
-
-      if (Number.isInteger(quantity) && quantity > 0) {
-        setCart((prev) => {
-          return prev.map((productInCart) => {
-            if (productInCart.id === id) {
-              return { ...productInCart, quantity: quantity };
-            } else {
-              return productInCart;
-            }
-          });
-        });
-      }
-    }
-  };
-
   const filteredProducts = useMemo(() => {
     const products = adapt(data);
 
@@ -91,29 +48,7 @@ export default function ShopPage() {
     <>
       <Header name={"Charles"} />
       <p>{cart.length}</p>
-      {show_items}
-      <form onSubmit={(e) => submitHandler(e)}>
-        <input
-          type="number"
-          value={quantityInput}
-          onChange={(e) => {
-            setQuantityInput(e.target.value);
-          }}
-        />
-        <select
-          name=""
-          id=""
-          value={selectedProductId}
-          onChange={(e) => {
-            setSelectedProductId(e.target.value);
-          }}
-        >
-          <option value="">Choose a product</option>
-          {options}
-        </select>
-
-        <button type="submit"> Update Quantity </button>
-      </form>
+      
       <SearchBar value={searchText} onSearch={setSearchText} />
       {filteredProducts.length === 0 ? (
         <p>No products Found</p>
