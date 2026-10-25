@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import ProductList from './components/ProductList/ProductList'
 import Header from './components/Header/Header'
+import CartItem from'./components/CartItem/CartItem'
 
 function App() {
 
@@ -33,27 +34,34 @@ function App() {
 
   function addToCart(product) {
 
-    if (cart.find(productInCart => productInCart.id === product.id)) {
-        setCart((prev) => prev.map((item) => {
-          
-        if (item.id === product.id) {
+    
+        setCart((prev) => {
 
-          return { ...item, quantity: item.quantity + 1}
+          if (prev.find(productInCart => productInCart.id === product.id)) {
 
-        } else {
+            return prev.map((item) => {
 
-          return item
+              if (item.id === product.id){
+
+                return { ...item, quantity: item.quantity + 1}
+
+              } else {
+
+                return item
+
+              }
+
+            })  
+
+          } else {
+
+              return [...prev, {...product , quantity: 1}]
+
+            }
 
         }
- 
-
-      }))
-    } else {
-
-        return setCart((prev) => [...prev, {...product, quantity: 1}])
-
-    }
-
+        )
+        
   }
 
   function deleteFromCart(id) {
@@ -66,15 +74,12 @@ function App() {
 
   }
 
-  const show_items = cart.map((x) => {
+  const show_items = cart.map((item) => {
 
     return (
-      <div key={x.id}>
+       
+        <CartItem key={item.id} item={ item } onRemove={ deleteFromCart }/>
 
-        <button onClick={() => deleteFromCart( x.id )}> Remove to cart </button>
-        <p> {x.name} {x.quantity}</p>
-
-      </div>
     )
 
   })
@@ -84,7 +89,7 @@ function App() {
       <Header name={ "Charles" } />
       <p>{ cart.length }</p>
       { show_items }
-      <ProductList products={ test_product} onAddToCart = { addToCart }/>
+      <ProductList products={ test_product } onAddToCart = { addToCart }/>
     </>
   )
 }
