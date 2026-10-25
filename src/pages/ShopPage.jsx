@@ -8,7 +8,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export default function ShopPage() {
-  const [cart, setCart] = useState([]);
+  const initialCart = () => {
+    try {
+      const cart = localStorage.getItem("cart");
+
+      if (cart) return JSON.parse(cart);
+      else {
+        return [];
+      }
+    } catch {
+      return [];
+    }
+  };
+
+  const [cart, setCart] = useState(initialCart);
   const [quantityInput, setQuantityInput] = useState(1);
   const [selectedProductId, setSelectedProductId] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -93,8 +106,12 @@ export default function ShopPage() {
     return product.name.toLowerCase().includes(searchText.toLowerCase());
   });
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   if (loading) return <p>Cargando ...</p>;
-  if (error) return <p>{ error } </p>;
+  if (error) return <p>{error} </p>;
 
   return (
     <>
