@@ -31,12 +31,43 @@ function App() {
 
   ] 
 
+  function addToCart(product) {
+
+    if (cart.find(productInCart => productInCart.id === product.id)) {
+        setCart((prev) => prev.map((item) => {
+          
+        if (item.id === product.id) {
+
+          return { ...item, quantity: item.quantity + 1}
+
+        } else {
+
+          return item
+
+        }
+ 
+
+      }))
+    } else {
+
+        return setCart((prev) => [...prev, {...product, quantity: 1}])
+
+    }
+
+  }
+
+  const show_items = cart.map((x) => {
+
+    return <p>{x.name} {x.quantity}</p>
+
+  })
 
   return (
     <>
       <Header name={ "Charles" } />
       <p>{ cart.length }</p>
-      <ProductList products={ test_product }/>
+      { show_items }
+      <ProductList products={ test_product} onAddToCart = { addToCart } />
     </>
   )
 }
