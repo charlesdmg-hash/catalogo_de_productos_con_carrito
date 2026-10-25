@@ -12,6 +12,8 @@ export default function CartPage() {
     setCart((prev) => {
       return prev.filter((product) => id !== product.id);
     });
+
+    if (id === Number(selectedProductId)) setSelectedProductId("");
   }
 
   const show_items = cart.map((item) => {
