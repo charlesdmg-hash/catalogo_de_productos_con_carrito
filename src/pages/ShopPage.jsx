@@ -6,7 +6,7 @@ import adapt from "../utils/adaptar";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useFetch from "../hooks/useFetch";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export default function ShopPage() {
   const [cart, setCart] = useLocalStorage({ key: "cart", initialValue: [] });
@@ -14,9 +14,9 @@ export default function ShopPage() {
   const [selectedProductId, setSelectedProductId] = useState("");
   const [searchText, setSearchText] = useState("");
 
-  const { data, loading, error } = useFetch("https://fakestoreapi.com/products");
-
-  const products = adapt(data)
+  const { data, loading, error } = useFetch(
+    "https://fakestoreapi.com/products",
+  );
 
   function addToCart(product) {
     setCart((prev) => {
@@ -74,9 +74,15 @@ export default function ShopPage() {
     }
   };
 
-  const filteredProducts = products.filter((product) => {
-    return product.name.toLowerCase().includes(searchText.toLowerCase());
-  });
+  const filteredProducts = useMemo(() => {
+    const products = adapt(data);
+
+    const filteredProducts = products.filter((product) => {
+      return product.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+
+    return filteredProducts;
+  }, [data, searchText]);
 
   if (loading) return <p>Cargando ...</p>;
   if (error) return <p>{error} </p>;

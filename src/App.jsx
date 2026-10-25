@@ -1,15 +1,26 @@
-import './App.css'
+import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
+import { Routes, Route } from "react-router-dom";
 
-import ShopPage from './pages/ShopPage'
-
+import ShopPage from "./pages/ShopPage";
+import CartPage from "./pages/CartPage";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 function App() {
-
   return (
-
-    <ShopPage />
-    
-  )
+    <>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ShopPage />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
