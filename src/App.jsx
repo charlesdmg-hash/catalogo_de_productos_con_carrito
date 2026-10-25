@@ -7,6 +7,8 @@ import CartItem from'./components/CartItem/CartItem'
 function App() {
 
   const [cart, setCart] = useState([])
+  const [quantityInput, setQuantityInput] = useState(1)
+  const [selectedProductId, setSelectedProductId] = useState("")
 
   const test_product = [
     {
@@ -84,11 +86,55 @@ function App() {
 
   })
 
+  const options = cart.map((option) => {
+            return (
+              <option key={ option.id } value={ option.id }> { option.name } </option>
+            )
+          })
+
+  const submitHandler = (e) => {
+
+    e.preventDefault() 
+
+    if (selectedProductId) {
+      const id = Number(selectedProductId)
+      const quantity = Number(quantityInput)
+
+        if (Number.isInteger(quantity) && quantity > 0) {
+
+           setCart((prev) => {
+            return prev.map((productInCart) => {
+              if (productInCart.id === id) {
+                return {...productInCart, quantity: quantity}
+              } else {
+                return productInCart
+              }
+            })
+          })
+
+            }
+          }
+        
+        
+        }
+
+
   return (
     <>
       <Header name={ "Charles" } />
       <p>{ cart.length }</p>
       { show_items }
+      <form onSubmit={ (e) => submitHandler(e)}>
+
+        <input type="number" value={ quantityInput } onChange = {(e) => { setQuantityInput(e.target.value) }} />
+        <select name="" id=""  value={ selectedProductId } onChange={ (e) => { setSelectedProductId(e.target.value)}}>
+          <option value="">Choose a product</option>
+          { options }
+        </select>
+
+        <button type='submit'> Update Quantity </button>
+      </form>
+      
       <ProductList products={ test_product } onAddToCart = { addToCart }/>
     </>
   )
