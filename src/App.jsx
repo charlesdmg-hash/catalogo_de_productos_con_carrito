@@ -56,9 +56,26 @@ function App() {
 
   }
 
+  function deleteFromCart(id) {
+
+      setCart((prev) => {
+        
+        return prev.filter((product) => id !== product.id)
+
+      })
+
+  }
+
   const show_items = cart.map((x) => {
 
-    return <p>{x.name} {x.quantity}</p>
+    return (
+      <div key={x.id}>
+
+        <button onClick={() => deleteFromCart( x.id )}> Remove to cart </button>
+        <p> {x.name} {x.quantity}</p>
+
+      </div>
+    )
 
   })
 
@@ -67,7 +84,7 @@ function App() {
       <Header name={ "Charles" } />
       <p>{ cart.length }</p>
       { show_items }
-      <ProductList products={ test_product} onAddToCart = { addToCart } />
+      <ProductList products={ test_product} onAddToCart = { addToCart }/>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import ProductCard from "../ProductCard/ProductCard"
 
-export default function ProductList({ products, onAddToCart }) {
+export default function ProductList({ products, onAddToCart}) {
 
     const product_list = products.map( (product) => {
     
