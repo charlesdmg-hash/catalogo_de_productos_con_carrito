@@ -4,9 +4,9 @@ import CartItem from "../components/CartItem/CartItem";
 import SearchBar from "../components/SearchBar/SearchBar";
 import adapt from "../utils/adaptar";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useFetch from "../hooks/useFetch";
 
 import { useState } from "react";
-import { useEffect } from "react";
 
 export default function ShopPage() {
   const [cart, setCart] = useLocalStorage({ key: "cart", initialValue: [] });
@@ -14,25 +14,9 @@ export default function ShopPage() {
   const [selectedProductId, setSelectedProductId] = useState("");
   const [searchText, setSearchText] = useState("");
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, loading, error } = useFetch("https://fakestoreapi.com/products");
 
-  useEffect(() => {
-    const cargar = async () => {
-      try {
-        const res = await fetch("https://fakestoreapi.com/products");
-
-        if (!res.ok) throw new Error("Error ocurred");
-        setProducts(adapt(await res.json()));
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    cargar();
-  }, []);
+  const products = adapt(data)
 
   function addToCart(product) {
     setCart((prev) => {
