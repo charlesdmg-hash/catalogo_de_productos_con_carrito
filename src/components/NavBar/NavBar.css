@@ -1,8 +1,27 @@
-a {
+#nav-link > a {
     text-decoration: none;
+    color: aliceblue;
+    margin: 0 2px;
+
 }
 
-a.active {
+#nav-link > a.active {
     font-weight: bold;
     text-decoration: underline;
 }
+
+nav {
+    display: flex;
+    background-color: gray;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 2px 10px 2px 5px;
+}
+
+#cart-svg {
+    display: box;
+    gap: 100px;
+}
+
+

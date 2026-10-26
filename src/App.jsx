@@ -1,4 +1,5 @@
 import "./App.css";
+import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar/NavBar";
 import { Routes, Route } from "react-router-dom";
 
@@ -11,6 +12,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 function App() {
   return (
     <>
+    <Header name={ "DMG" }/>
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

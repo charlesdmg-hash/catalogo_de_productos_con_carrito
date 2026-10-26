@@ -1,0 +1,63 @@
+.product-card {
+  border: 2px solid gray;
+  margin: 10px 5px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.product-card > h2 {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.product-card-info {
+  display: flex;
+  font-size: 0.8rem;
+  text-align: justify;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+#card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+}
+
+#description {
+  max-height: 100px;
+  white-space: wrap; /* Prevents the text from wrapping to a new line */
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
+#product-links {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#product-links > a {
+  color: lightcoral;
+}
+
+#product-links > a:hover {
+  color: grey;
+}
+
+button {
+    appearance: none;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+button:hover {
+  background-color: antiquewhite;
+}

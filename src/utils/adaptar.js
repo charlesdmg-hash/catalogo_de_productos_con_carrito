@@ -4,6 +4,7 @@ export default function adapt(products) {
       id: product.id,
       name: product.title,
       price: product.price,
+      description: product.description,
       image: product.image,
     };
   });

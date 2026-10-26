@@ -32,8 +32,6 @@ export default function ShopPage() {
 
   return (
     <>
-      <Header name={"Charles"} />
-      <p>{cart.length}</p>
       
       <SearchBar value={searchText} onSearch={setSearchText} />
       {filteredProducts.length === 0 ? (
