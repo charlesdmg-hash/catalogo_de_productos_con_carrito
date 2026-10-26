@@ -35,3 +35,23 @@ h2 {
   padding: 10px;
   margin: 10px;
 }
+
+#update-qty {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    gap: 2px;
+}
+
+#update-qty > input {
+    width: 30px;
+}
+
+#update-qty-btn {
+    padding: 0 5px;
+}
+
+#cart-page-totals{
+    background-color: lightgray;
+    padding-left: 5px;
+}

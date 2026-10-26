@@ -74,12 +74,12 @@ export default function CartPage() {
       {cart.length === 0 ? (
         <p id="cart-empty-msg"> Your cart is Empty</p>
       ) : (
-        <>
-          <p>Subtotal: {subtotals.toFixed(2)}$</p>
-          <p>Tax: {tax * 100}%</p>
-          <p>Shipping: {shipping}$</p>
-          <p>Total: {total.toFixed(2)}$</p>
-        </>
+        <div id="cart-page-totals">
+          <p><b>Subtotal: </b>{subtotals.toFixed(2)}$</p>
+          <p><b>Tax: </b>{tax * 100}%</p>
+          <p><b>Shipping: </b>{shipping}$</p>
+          <p><b>Total: {total.toFixed(2)}$</b></p>
+        </div>
       )}
     </>
   );

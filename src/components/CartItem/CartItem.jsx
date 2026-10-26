@@ -23,7 +23,8 @@ export default function CartItem({
             <b>Total: {item.price * item.quantity}$</b>
           </p>
           <form onSubmit={(e) => submitHandler(e)}>
-            <label  htmlFor={`quantity-${item.id}`}>Cantidad</label>
+            <label  htmlFor={`quantity-${item.id}`}>Quantity</label>
+            <div id="update-qty">
             <input
               id={`quantity-${item.id}`}
               min={1}
@@ -36,7 +37,8 @@ export default function CartItem({
               }}
             />
 
-            <button type="submit"> Update Quantity </button>
+            <button id="update-qty-btn" type="submit"> + </button>
+            </div>
           </form>
           <button onClick={() => onRemove(item.id)}> Remove from cart </button>
         </div>
