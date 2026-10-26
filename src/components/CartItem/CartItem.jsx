@@ -1,6 +1,17 @@
 import "./CartItem.css";
 
-export default function CartItem({ item, onRemove }) {
+export default function CartItem({
+  item,
+  onRemove,
+  quantityInput,
+  onQuantityChange,
+  onUpdateCartQuantity,
+}) {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    onUpdateCartQuantity(item.id, quantityInput)
+  };
+
   return (
     <div className="product-card">
       <h2>{item.name}</h2>
@@ -11,7 +22,22 @@ export default function CartItem({ item, onRemove }) {
           <p>
             <b>Total: {item.price * item.quantity}$</b>
           </p>
-          
+          <form onSubmit={(e) => submitHandler(e)}>
+            <label  htmlFor={`quantity-${item.id}`}>Cantidad</label>
+            <input
+              id={`quantity-${item.id}`}
+              min={1}
+              step={1}
+              required
+              type="number"
+              value={quantityInput}
+              onChange={(e) => {
+                onQuantityChange(item.id, e.target.value);
+              }}
+            />
+
+            <button type="submit"> Update Quantity </button>
+          </form>
           <button onClick={() => onRemove(item.id)}> Remove from cart </button>
         </div>
       </div>
