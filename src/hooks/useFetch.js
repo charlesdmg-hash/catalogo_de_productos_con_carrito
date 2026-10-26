@@ -9,11 +9,16 @@ export default function useFetch(url) {
     const cargar = async () => {
       try {
         setLoading(true);
-        setError(null)
+        setError(null);
         const res = await fetch(url);
 
         if (!res.ok) throw new Error("Error ocurred");
-        setData(await res.json());
+        const textRes = await res.text();
+        if (textRes.trim() !== "") {
+          setData(JSON.parse(textRes));
+        } else {
+          throw new Error("No data found for this request");
+        }
       } catch (e) {
         setError(e.message);
       } finally {

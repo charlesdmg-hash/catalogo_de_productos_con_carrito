@@ -70,16 +70,23 @@ export default function CartPage() {
         <p> Your cart is Empty</p>
       ) : (
         <form onSubmit={(e) => submitHandler(e)}>
+          <label htmlFor="quantity">Cantidad</label>
           <input
+            id="quantity"
+            min={1}
+            step={1}
+            required
             type="number"
             value={quantityInput}
             onChange={(e) => {
               setQuantityInput(e.target.value);
             }}
           />
+          <label htmlFor="dropdown">Select product</label>
           <select
+            required
             name=""
-            id=""
+            id="dropdown"
             value={selectedProductId}
             onChange={(e) => {
               setSelectedProductId(e.target.value);

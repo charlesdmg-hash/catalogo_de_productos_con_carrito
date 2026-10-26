@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
@@ -13,6 +13,13 @@ export default function ProductDetailPage() {
 
   if (loading) return <p>Cargando ...</p>;
   if (error) return <p>{error} </p>;
+  if (!data || !data.id)
+    return (
+      <>
+        <p>Product not Found</p>
+        <Link to={"/products"}>Browse products</Link>
+      </>
+    );
 
   return (
     <>
