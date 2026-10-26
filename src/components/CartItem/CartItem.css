@@ -1,0 +1,37 @@
+h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#cart-empty-msg {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+#cart-item-img {
+  width: 150px;
+  height: 150px;
+}
+
+#cart-item-info {
+  padding: 10px;
+}
+
+#cart-item-info > p {
+  padding: 2px;
+}
+
+#cart-item-info > button {
+  margin-top: 20px;
+}
+
+.cart-info {
+  display: flex;
+  font-size: 0.8rem;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}

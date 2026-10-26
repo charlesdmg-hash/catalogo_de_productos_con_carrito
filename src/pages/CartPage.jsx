@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import "../components/CartItem/CartItem.css";
 
 import CartItem from "../components/CartItem/CartItem";
 
@@ -60,44 +61,47 @@ export default function CartPage() {
 
   return (
     <>
-      <h2>CartPage</h2>
+      <h2>Cart</h2>
       {show_items}
-      <p>Subtotal: {subtotals.toFixed(2)}</p>
-      <p>Tax: {tax * 100}%</p>
-      <p>Shipping: {shipping}$</p>
-      <p>Total: {total.toFixed(2)}$</p>
-      {cart.length === 0 ? (
-        <p> Your cart is Empty</p>
-      ) : (
-        <form onSubmit={(e) => submitHandler(e)}>
-          <label htmlFor="quantity">Cantidad</label>
-          <input
-            id="quantity"
-            min={1}
-            step={1}
-            required
-            type="number"
-            value={quantityInput}
-            onChange={(e) => {
-              setQuantityInput(e.target.value);
-            }}
-          />
-          <label htmlFor="dropdown">Select product</label>
-          <select
-            required
-            name=""
-            id="dropdown"
-            value={selectedProductId}
-            onChange={(e) => {
-              setSelectedProductId(e.target.value);
-            }}
-          >
-            <option value="">Choose a product</option>
-            {options}
-          </select>
 
-          <button type="submit"> Update Quantity </button>
-        </form>
+      {cart.length === 0 ? (
+        <p id="cart-empty-msg"> Your cart is Empty</p>
+      ) : (
+        <>
+          <p>Subtotal: {subtotals.toFixed(2)}$</p>
+          <p>Tax: {tax * 100}%</p>
+          <p>Shipping: {shipping}$</p>
+          <p>Total: {total.toFixed(2)}$</p>
+          <form onSubmit={(e) => submitHandler(e)}>
+            <label htmlFor="quantity">Cantidad</label>
+            <input
+              id="quantity"
+              min={1}
+              step={1}
+              required
+              type="number"
+              value={quantityInput}
+              onChange={(e) => {
+                setQuantityInput(e.target.value);
+              }}
+            />
+            <label htmlFor="dropdown">Select product</label>
+            <select
+              required
+              name=""
+              id="dropdown"
+              value={selectedProductId}
+              onChange={(e) => {
+                setSelectedProductId(e.target.value);
+              }}
+            >
+              <option value="">Choose a product</option>
+              {options}
+            </select>
+
+            <button type="submit"> Update Quantity </button>
+          </form>
+        </>
       )}
     </>
   );

@@ -13,7 +13,7 @@
 .product-card-info {
   display: flex;
   font-size: 0.8rem;
-  text-align: justify;
+  text-align: center;
   align-items: center;
   padding: 10px;
   gap: 10px;
@@ -32,9 +32,9 @@ img {
 
 #description {
   max-height: 100px;
+  max-width: 230px;
   white-space: wrap; /* Prevents the text from wrapping to a new line */
   overflow: auto;
-  text-overflow: ellipsis;
 }
 
 #product-links {
