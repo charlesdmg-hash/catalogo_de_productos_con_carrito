@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 import { Routes, Route } from "react-router-dom";
 
 import ShopPage from "./pages/ShopPage";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+    <Footer />
     </>
   );
 }
