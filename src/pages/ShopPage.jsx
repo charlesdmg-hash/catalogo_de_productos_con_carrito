@@ -49,22 +49,26 @@ export default function ShopPage() {
       ) : (
         <>
           <ProductList products={paginatedProducts} onAddToCart={addToCart} />
-         
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage((prev) => prev - 1)}>
-              Previous
+
+          <div id="page-nav">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              {"<--"}
             </button>
-          
 
-          <p>
-            Page {currentPage} of {totalPages}{" "}
-          </p>
+            <p>
+              Page {currentPage} of {totalPages}{" "}
+            </p>
 
-          <button
-            disabled={currentPage >= totalPages}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
+            <button
+              disabled={currentPage >= totalPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              {"-->"}
+            </button>
+          </div>
         </>
       )}
     </>

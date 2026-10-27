@@ -1,0 +1,23 @@
+.app-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+#page-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+#not-found-h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 50%;
+}

@@ -12,18 +12,20 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 
 function App() {
   return (
-    <>
-    <Header name={ "DMG" }/>
+    <div className="app-layout">
+      <Header name={"DMG"} />
       <NavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ShopPage />} />
-        <Route path="/products/:id" element={<ProductDetailPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    <Footer />
-    </>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ShopPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
