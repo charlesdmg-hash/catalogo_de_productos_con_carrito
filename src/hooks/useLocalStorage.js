@@ -22,7 +22,7 @@ export default function useLocalStorage({ key, initialValue }) {
         localStorage.setItem(key, JSON.stringify(value));
         
     } catch (error) {
-        
+        throw new Error("Error ocurred")
     }
   }, [key, value])
 
