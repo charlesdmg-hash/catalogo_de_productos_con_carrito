@@ -22,24 +22,28 @@ export default function ProductDetailPage() {
     );
 
   return (
-    <>
-      <h2>ProductDetailPage</h2>
-      <p>{data.title}</p>
-      <p>{data.price}</p>
+    <div className="product-detail-page">
+      <h2>{data.title}</h2>
+
       <img src={data.image} alt={data.title} />
       <p>{data.description}</p>
-      <button
-        onClick={() => {
-          addToCart({
-            id: data.id,
-            name: data.title,
-            price: data.price,
-            image: data.image,
-          });
-        }}
-      >
-        Add to cart
-      </button>
-    </>
+      <div className="product-detail-addcart">
+        <p>
+          <b>{data.price}$</b>
+        </p>
+        <button
+          onClick={() => {
+            addToCart({
+              id: data.id,
+              name: data.title,
+              price: data.price,
+              image: data.image,
+            });
+          }}
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
   );
 }
