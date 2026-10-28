@@ -14,7 +14,7 @@ export default function HomePage() {
           <Link to={"/products"}>Browse items</Link>
         </div>
       </div>
-      <div className="home-card">
+      <div id="unique-home-card" className="home-card">
         <img src={jewellery} alt="jewellery" />
         <div className="text-overlay">
           <p>Explore Jewelry</p>

@@ -14,6 +14,7 @@
   display: flex;
   font-size: 0.8rem;
   text-align: center;
+  justify-content: center;
   align-items: center;
   padding: 10px;
   gap: 10px;
@@ -33,7 +34,7 @@ img {
 #description {
   max-height: 100px;
   max-width: 230px;
-  white-space: wrap; /* Prevents the text from wrapping to a new line */
+  white-space: wrap; 
   overflow: auto;
 }
 
@@ -61,3 +62,30 @@ button {
 button:hover {
   background-color: antiquewhite;
 }
+
+@media (min-width: 640px) {
+  #description {
+  max-height: 100px;
+  max-width: 500px;
+  white-space: wrap; 
+  overflow: auto;
+}
+
+}
+
+@media (min-width: 1024px) {
+  #description {
+  max-height: 100px;
+  max-width: 900px;
+  white-space: wrap; 
+  overflow: auto;
+  font-size: 1rem;
+}
+
+.product-card-info {
+  gap: 25px;
+}
+
+}
+
+

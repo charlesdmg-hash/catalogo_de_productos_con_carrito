@@ -9,7 +9,7 @@ export default function CartItem({
 }) {
   const submitHandler = (e) => {
     e.preventDefault();
-    onUpdateCartQuantity(item.id, quantityInput)
+    onUpdateCartQuantity(item.id, quantityInput);
   };
 
   return (
@@ -22,22 +22,27 @@ export default function CartItem({
           <p>
             <b>Total: {item.price * item.quantity}$</b>
           </p>
+        </div>
+        <div className="cart-form">
           <form onSubmit={(e) => submitHandler(e)}>
-            <label  htmlFor={`quantity-${item.id}`}>Quantity</label>
+            <label htmlFor={`quantity-${item.id}`}>Quantity</label>
             <div id="update-qty">
-            <input
-              id={`quantity-${item.id}`}
-              min={1}
-              step={1}
-              required
-              type="number"
-              value={quantityInput}
-              onChange={(e) => {
-                onQuantityChange(item.id, e.target.value);
-              }}
-            />
+              <input
+                id={`quantity-${item.id}`}
+                min={1}
+                step={1}
+                required
+                type="number"
+                value={quantityInput}
+                onChange={(e) => {
+                  onQuantityChange(item.id, e.target.value);
+                }}
+              />
 
-            <button id="update-qty-btn" type="submit"> + </button>
+              <button id="update-qty-btn" type="submit">
+                {" "}
+                +{" "}
+              </button>
             </div>
           </form>
           <button onClick={() => onRemove(item.id)}> Remove from cart </button>
