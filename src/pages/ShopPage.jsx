@@ -9,6 +9,7 @@ import { useState, useMemo, useContext } from "react";
 export default function ShopPage() {
   const { cart, addToCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
@@ -23,11 +24,14 @@ export default function ShopPage() {
     const products = adapt(data);
 
     const filteredProducts = products.filter((product) => {
-      return product.name.toLowerCase().includes(searchText.toLowerCase());
+      return (
+        product.name.toLowerCase().includes(searchText.toLowerCase()) &&
+        (selectedCategory=== "" || product.category === selectedCategory)
+      );
     });
 
     return filteredProducts;
-  }, [data, searchText]);
+  }, [data, searchText, selectedCategory]);
 
   const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
@@ -38,12 +42,38 @@ export default function ShopPage() {
     setCurrentPage(1);
   };
 
+  const categories = data.map((product) => {
+    return product.category;
+  });
+
+  const categoriesSet = [...new Set(categories)];
+
   if (loading) return <p>Cargando ...</p>;
   if (error) return <p> {error} </p>;
 
   return (
     <>
       <SearchBar value={searchText} onSearch={handleSearch} />
+
+      <label htmlFor="categories">Category: </label>
+      <select
+        name="categories"
+        id="categories"
+        value={selectedCategory}
+        onChange={(e) => {
+          (setSelectedCategory(e.target.value), setCurrentPage(1));
+        }}
+      > 
+        <option value="">All products</option>
+        {categoriesSet.map((category) => {
+          return (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          );
+        })}
+      </select>
+
       {filteredProducts.length === 0 ? (
         <p>No products Found</p>
       ) : (
