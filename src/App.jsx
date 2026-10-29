@@ -13,8 +13,10 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 function App() {
   return (
     <div className="app-layout">
-      <Header name={"DMG"} />
-      <NavBar />
+      <div className="moving-nav">
+        <Header name={"DMG"} />
+        <NavBar />
+      </div>
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />

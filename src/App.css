@@ -2,10 +2,18 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 main {
   flex: 1;
+}
+
+.moving-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: aliceblue;
 }
 
 /* Home page */
