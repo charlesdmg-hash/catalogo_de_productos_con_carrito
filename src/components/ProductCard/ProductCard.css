@@ -20,6 +20,10 @@
   gap: 10px;
 }
 
+#card-info + p {
+  max-width: 50%;
+}
+
 #card-info {
   display: flex;
   flex-direction: column;

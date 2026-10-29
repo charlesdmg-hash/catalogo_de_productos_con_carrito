@@ -3,18 +3,23 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import adapt from "../utils/adaptar";
 import useFetch from "../hooks/useFetch";
 import { CartContext } from "../context/CartContext";
+import { useSearchParams } from "react-router-dom";
 
 import { useState, useMemo, useContext } from "react";
 
 export default function ShopPage() {
   const { cart, addToCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryFromUrl = searchParams.get("category");
+
+  const selectedCategory = categoryFromUrl ?? "";
 
   const { data, loading, error } = useFetch(
     "https://fakestoreapi.com/products",
@@ -26,7 +31,7 @@ export default function ShopPage() {
     const filteredProducts = products.filter((product) => {
       return (
         product.name.toLowerCase().includes(searchText.toLowerCase()) &&
-        (selectedCategory=== "" || product.category === selectedCategory)
+        (selectedCategory === "" || product.category === selectedCategory)
       );
     });
 
@@ -61,9 +66,10 @@ export default function ShopPage() {
         id="categories"
         value={selectedCategory}
         onChange={(e) => {
-          (setSelectedCategory(e.target.value), setCurrentPage(1));
+          setSearchParams({ category: e.target.value });
+          setCurrentPage(1);
         }}
-      > 
+      >
         <option value="">All products</option>
         {categoriesSet.map((category) => {
           return (
