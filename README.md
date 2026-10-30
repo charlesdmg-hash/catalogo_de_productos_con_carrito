@@ -23,7 +23,7 @@ Home, Catalog, Product Details, Cart and NOT FOUND
 
 ![Home](screenshots/Home.png)
 ![Products](screenshots/Products.png)
-![Product Details](screenshots/Products-detail.png)
+![ProductDetails](screenshots/Products-detail.png)
 ![Cart](screenshots/Cart.png)
 
 
