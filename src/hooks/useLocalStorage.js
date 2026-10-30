@@ -9,7 +9,7 @@ export default function useLocalStorage({ key, initialValue }) {
       else {
         return initialValue;
       }
-    } catch {
+    } catch  {
       return initialValue;
     }
   };
@@ -21,7 +21,7 @@ export default function useLocalStorage({ key, initialValue }) {
 
         localStorage.setItem(key, JSON.stringify(value));
         
-    } catch (error) {
+    } catch {
         throw new Error("Error ocurred")
     }
   }, [key, value])

@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useMemo, useContext } from "react";
 
 export default function ShopPage() {
-  const { cart, addToCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
